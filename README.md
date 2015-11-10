@@ -9,9 +9,9 @@ Une macro .bas permet ensuite un formattage plus lisible permettant une sauvegar
 
 ### Mode d'emploi :
 
-Placer la saisine générée par APAFIS dans le répertoire contenant l'exécutable ou le script perl.
-Lancer le logiciel Convert-Apafis_to_doc.exe ou executer perl saisine.pl
-Taper 1 pour accepter puis valider
+* Placer la saisine générée par APAFIS dans le répertoire contenant l'exécutable ou le script perl.
+* Lancer le logiciel Convert-Apafis_to_doc.exe ou executer perl saisine.pl
+* Taper 1 pour accepter puis valider
 (Attention, tous les fichiers Apafis présents dans le répertoire sont traités et écrasés si déjà présents)
 
 Pour un usage avancé, une macro Word est disponible afin de formatter le fichier produit.
