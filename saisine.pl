@@ -2,14 +2,14 @@
 
 use Cwd;
 use HTML::Entities;
+use RTF::Writer;
 
-
-print "\n\n\n\nCe script a pour but de transformer les fichier .xml de l'application Apafis en fichiers lisibles dans un traitement de texte.\n Chaque fichier .xml sera converti en .xml.doc \n
-ATTENTION, si un fichier du nom de la saisine (.xml.doc) existe, il sera repris par le script.\n-
+print "\n\n\n\nCe script a pour but de transformer les fichier .xml de l'application Apafis en fichiers lisibles dans un traitement de texte.\n Chaque fichier .xml sera converti en .doc \n
+ATTENTION, si un fichier du nom de la saisine (.doc) existe, il sera repris par le script.\n-
 Aucune garantie n'est fournie sur l'exactitude de la retranscription par le script, si vous constatez un souci, merci de m'en faire part.\n-
 Benoit Petit-Demouliere : petitd\@igbmc.fr\n
 
-Script Version 1.01 - 10/11/2015.
+Script Version 1.02 - 07/03/2019.
 
 Continuez en tapant 1 puis Valider, ou quittez en tapant une autre touche.\n";
 chomp (my $result = <STDIN>);
@@ -54,12 +54,11 @@ $line =~ s/>false</>NON</g;
 $line =~ s/<$balise>//;
 $line =~ s/<\/$balise>//;
 $line =~ s/   +/ /;
+
 print OUT decode_entities($line),"\n";
 }
 }
 }
-
-
 
 }
 
@@ -69,7 +68,48 @@ close IN or die $!;
 close OUT or die $!;
 }
 
+my $dir = cwd();
+opendir DIR, $dir or die "cannot open dir $dir: $!";
+my @tmpfiles = glob "$dir/*.doc";
+closedir(DIR);
+
+foreach(@tmpfiles){
+open( I, "<:utf8", $_ ) or die "$ARGV[0]: $!";
+my $utf = do { local $/; <I> };  # slurp it
+
+# here's the magic part: replace each wide character with
+# "\uN\5f", where "N" is the decimal numeric codepoint:
+
+$utf =~ s/([^[:ascii:]])/sprintf("\\u%d\\'5f",ord($1))/eg;
+
+my $out = $_;
+
+my $rtf = RTF::Writer->new_to_file( $out );
+my @pars = split( /\n+/, $utf );
+$rtf->prolog( title => $out );
+for my $par ( @pars ) {
+    $rtf->paragraph( \$par );  # need to pass $par by reference
+}
+$rtf->close;
+}
+
 print "Conversion finie\nValidez pour fermer ce script.\n";
 <STDIN>
 }
 else{exit;}
+
+use Cwd;
+
+my $dir = cwd();
+opendir DIR, $dir or die "cannot open dir $dir: $!";
+my @tmpfilestodelete = glob "$dir/*.tmp";
+closedir(DIR);
+
+foreach(@tmpfilestodelete){
+  my $qfn = $_;
+
+open IN,$qfn or die $!;
+close IN,$qfn or die $!;
+unlink IN,$qfn ;
+
+}
