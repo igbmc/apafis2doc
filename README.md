@@ -9,7 +9,7 @@ L'exécutable et le script perl fournis dans ce dépôt convertissent les docume
 ### Mode d'emploi :
 
 * Placer la saisine générée par APAFIS dans le répertoire contenant l'exécutable ou le script perl.
-* Lancer le logiciel Convert-Apafis_to_doc-2.0.exe **[Télécharger](https://github.com/igbmc/apafis2doc/blob/master/Convert-Apafis_to_doc-2.0.exe)** ou executer perl saisine-2.00.pl
+* Lancer le logiciel Convert-Apafis_to_doc-2.0.exe **[Télécharger](https://github.com/igbmc/apafis2doc/blob/master/Convert-Apafis_to_doc-2.0.exe?raw=true)** ou executer perl saisine-2.00.pl
 * Taper 1 pour accepter puis valider
 (Attention, tous les fichiers Apafis au format xml présents dans le répertoire sont traités et les document doc correspondant seront écrasés si déjà présents)
 
