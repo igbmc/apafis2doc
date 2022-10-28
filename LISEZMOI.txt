@@ -1,4 +1,0 @@
-Placer la saisine générée par APAFIS dans ce répertoire.
-Lancer le logiciel Convert-Apafis_to_doc-2.0.exe
-Taper 1 pour accepter puis valider
-(Attention, tous les fichiers Apafis présents dans le répertoire sont traités et écrasés si déjà présents)

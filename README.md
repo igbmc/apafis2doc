@@ -4,7 +4,12 @@
 Ce dépôt vise à fournir une solution aux personnes travaillant avec l'application APAFIS, pour partager leurs documents avec d'autres utilisateurs.
 Il peut aussi fournir aux rapporteurs des Comités d'Ethique une solution convenable pour utiliser le suivi de modifications et les commentaires, permettant de faciliter leur travail.
 
-L'exécutable et le script perl fournis dans ce dépôt convertissent les documents xml sauvegardés par l'application APAFIS dans un document word au format UTF-8.
+L'exécutable et les script perl fournis dans ce dépôt convertissent les documents xml sauvegardés par l'application APAFIS dans un document word au format UTF-8.
+Deux versions pl existent : 
+- saisine-2.00-unformatted : produit un fichier sans balises, mais ne nécessite que l'installation du module RTF::Writer (cpan install RTF::Writer)
+- saisine-2.00  : produit un fichier contenant des balises html, mais requiert la compilation du module MsOffice::Word::HTML::Writer
+
+Le répertoire apache_cgi permet le déploiement d'une solution sur un serveur apache. Merci de vous référer à la documentation install.md dans ce répertoire.
 
 ### Mode d'emploi :
 

@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Convertisseur apafis</title>
+</head>
+<body>
+<h3>Ce formulaire vous aidera à visualiser ou convertir un fichier .xml généré par le logiciel apafis en un fichier word .doc.</h1>
+<p>Vous avez deux possiblités :</p>
+<ul><li>Convertir le fichier xml en fichier doc et le télécharger</li>
+<form action="/cgi-files/upload.cgi" method="post"
+enctype="multipart/form-data">
+<p><input type="file" name="file" /></p>
+<p><input type="submit" name="Submit" value="Convertir" /></p>
+</form>
+<li>Afficher le fichier xml en page web lisible dans le navigateur.</li>
+<form action="/cgi-files/viewer.cgi" method="post"
+enctype="multipart/form-data">
+<p><input type="file" name="file" /></p>
+<p><input type="submit" name="Submit" value="Voir dans le navigateur" /></p>
+</ul>
+</form>
+<p> Les documents envoyés sont supprimés au bout d'une minute automatiquement.</p>
+</body>
+</html>
