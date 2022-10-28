@@ -4,7 +4,8 @@ How to install on a fresh Debian OS with apache2 installed:
 
 edit /etc/apache2/apache2.conf
 
-add : 
+add :
+``` 
 AddHandler cgi-script .cgi .pl .py
 Options +ExecCGI
 <Directory /var/www/html/cgi-files>
@@ -17,6 +18,7 @@ Options +ExecCGI
         AllowOverride None
         Require all granted
 </Directory>
+```
 
 sudo a2enmod cgi
 sudo apt install libcgi-pm-perl
@@ -28,12 +30,15 @@ sudo apt-get install build-essential
 sudo cpan install MsOffice::Word::HTML::Writer
 
 3) Set-up the server
+```
 cp index.html /var/www/html
 cp *.cgi in /var/www/html/cgi-files
 chmod +x /var/www/html/cgi-files/*.cgi
 mkdir /var/www/html/upload
 chmod 755 /var/www/html/upload/
-
 sudo crontab -e
-
-add :  * * * * * rm /var/www/html/upload/*.*
+```
+add :  
+```
+* * * * * rm /var/www/html/upload/*.*
+```
