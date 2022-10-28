@@ -20,14 +20,17 @@ Options +ExecCGI
 </Directory>
 ```
 
+```
 sudo a2enmod cgi
 sudo apt install libcgi-pm-perl
 sudo systemctl restart apache2
- 
-2) Add building tools
+```
 
+2) Add building tools
+```
 sudo apt-get install build-essential
 sudo cpan install MsOffice::Word::HTML::Writer
+```
 
 3) Set-up the server
 ```
