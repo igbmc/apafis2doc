@@ -4,22 +4,74 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Convertisseur apafis</title>
 </head>
+<script>
+function upload_check_convert()
+{
+    var upl = document.getElementById("file_id");
+    var max = document.getElementById("max_id").value;
+
+    if(upl.files[0].size > max)
+    {
+       alert("Fichier trop gros!");
+       upl.value = "";
+    }
+
+};
+
+function upload_check_view()
+{
+    var upl = document.getElementById("file_id2");
+    var max = document.getElementById("max_id2").value;
+
+    if(upl.files[0].size > max)
+    {
+       alert("Fichier trop gros!");
+       upl.value = "";
+    }
+
+};
+
+function upload_check_clean()
+{
+    var upl = document.getElementById("file_id3");
+    var max = document.getElementById("max_id3").value;
+
+    if(upl.files[0].size > max)
+    {
+       alert("Fichier trop gros!");
+       upl.value = "";
+    }
+
+};
+
+
+</script>
 <body>
 <h3>Ce formulaire vous aidera à visualiser ou convertir un fichier .xml généré par le logiciel apafis en un fichier word .doc.</h1>
 <p>Vous avez deux possiblités :</p>
 <ul><li>Convertir le fichier xml en fichier doc et le télécharger</li>
-<form action="/cgi-files/upload.cgi" method="post"
+<p><form action="/cgi-files/upload.cgi" method="post"
 enctype="multipart/form-data">
-<p><input type="file" name="file" /></p>
+<input id="max_id" type="hidden" name="MAX_FILE_SIZE" value="50000000" />
+<input onchange="upload_check_convert()" id="file_id" type="file" name="file" accept=".xml" />
 <p><input type="submit" name="Submit" value="Convertir" /></p>
-</form>
+</form></p>
 <li>Afficher le fichier xml en page web lisible dans le navigateur.</li>
-<form action="/cgi-files/viewer.cgi" method="post"
+<p><form action="/cgi-files/viewer.cgi" method="post"
 enctype="multipart/form-data">
-<p><input type="file" name="file" /></p>
+<input id="max_id2" type="hidden" name="MAX_FILE_SIZE" value="50000000" />
+<input onchange="upload_check_view()" id="file_id2" type="file" name="file" accept=".xml" />
+<p><input type="submit" name="Submit" value="Voir dans le navigateur" /></p>
+</form>
+<li>Retirer les informations de version d'un fichier xml. Cela permet de transférer un apafis à un autre établissement utilisateur ou de repartir d'une version déjà versionée.</li>
+<p><form action="/cgi-files/clean.cgi" method="post"
+enctype="multipart/form-data">
+<input id="max_id3" type="hidden" name="MAX_FILE_SIZE" value="50000000" />
+<input onchange="upload_check_clean()" id="file_id3" type="file" name="file" accept=".xml" />
 <p><input type="submit" name="Submit" value="Voir dans le navigateur" /></p>
 </ul>
-</form>
+</form></p>
+
 <p> Les documents envoyés sont supprimés au bout d'une minute automatiquement.</p>
 </body>
 </html>

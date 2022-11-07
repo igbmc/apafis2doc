@@ -54,8 +54,8 @@ img {border: none;}
 </style>
 </head>
 <body>
-<p>Your file has not the good extension. Only .xml produced by apafis are accepted!</p>
-<p><a href="/">Go back to the form</a></p>
+<p>Seuls les fichiers .xml apafis sont autoris&eacute;s!</p>
+<p><a href="/">Retour</a></p>
 </body>
 </html>
 END_HTML
@@ -76,7 +76,7 @@ close UPLOADFILE;
 
 my $dir = cwd();
 
-my @files = glob "$upload_dir/*.xml";
+my @files = glob "$upload_dir/$filename";
 closedir(DIR);
 
 foreach(@files){
@@ -123,7 +123,7 @@ my %balises = (
 "ResponsablesMiseEnOeuvre NombreResponsablesMiseEnOeuvre=\"2\""=>"<h3>3.1.3. Responsable(s) de la mise en œuvre générale du projet dans l'EU et de sa conformité à l'autorisation de projet :</h3>",
 "ResponsablesMiseEnOeuvre NombreResponsablesMiseEnOeuvre=\"3\""=>"<h3>3.1.3. Responsable(s) de la mise en œuvre générale du projet dans l'EU et de sa conformité à l'autorisation de projet :</h3>",
 "ResponsablesMiseEnOeuvre NombreResponsablesMiseEnOeuvre=\"4\""=>"<h3>3.1.3. Responsable(s) de la mise en œuvre générale du projet dans l'EU et de sa conformité à l'autorisation de projet :</h3>",
-"CoordonneesResponsablesMiseEnOeuvre"=>"<br>Responsable(s) :",
+"CoordonneesResponsablesMiseEnOeuvre"=>"<br><br>Responsable(s) :",
 "Civilite"=>"<br>Civilité :",
 "Nom"=>"<br>Nom :",
 "Prenom"=>"<br>Prenom :",
@@ -141,7 +141,7 @@ my %balises = (
 "ResponsablesBienEtre NombreResponsablesBienEtre=\"2\""=>"<h3>3.1.4. Responsable(s) du bien-être des animaux :</h3>",
 "ResponsablesBienEtre NombreResponsablesBienEtre=\"3\""=>"<h3>3.1.4. Responsable(s) du bien-être des animaux :</h3>",
 "ResponsablesBienEtre NombreResponsablesBienEtre=\"4\""=>"<h3>3.1.4. Responsable(s) du bien-être des animaux :</h3>",
-"CoordonneesResponsablesBienEtre"=>"<br>Responsable(s) :",
+"CoordonneesResponsablesBienEtre"=>"<br><br>Responsable(s) :",
 "Personnel"=>"<h2>3.2. Le personnel </h2>",
 "ConceptionProceduresExp"=>"Compétences des personnes participant au projet :<br> - la conception des procédures expérimentales et des projets : ",
 "ApplicationProceduresExp"=>"<br> - l'application de procédures expérimentales aux animaux : ",
@@ -428,15 +428,15 @@ print <<END_HTML;
 <html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Thanks!</title>
+<title>C'est fait !</title>
 <style type="text/css">
 img {border: none;}
 </style>
 </head>
 <body>
-<p>Thanks for uploading your file!</p>
-<p>Download the word version here : <a href="/upload/$filename.doc"> Word doc </a></p>
-<p>This file will be deleted in 1 minutes automatically</p>
+<p>Merci pour l'envoi de votre fichier !</p>
+<p>T&eacute;l&eacute;charger le fichier Word en suivant le lien : <a href="/upload/$filename.doc" download> Fichier WORD </a></p>
+<p>Les fichiers sont supprim&eacute;s automatiquement chaque minute</p>
 </body>
 </html>
 END_HTML

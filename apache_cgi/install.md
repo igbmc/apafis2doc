@@ -41,7 +41,7 @@ mkdir /var/www/html/upload
 chmod 755 /var/www/html/upload/
 sudo crontab -e
 ```
-add :  
+add :
 ```
-* * * * * rm /var/www/html/upload/*.*
+* * * * * find /var/www/html/upload/*.* -mmin +2 -exec rm {} \;
 ```
