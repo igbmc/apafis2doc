@@ -9,10 +9,9 @@ ATTENTION, si un fichier du nom de la saisine (.doc) existe, il sera repris par 
 Aucune garantie n'est fournie sur l'exactitude de la retranscription par le script, si vous constatez un souci, merci de m'en faire part.\n-
 Benoit Petit-Demouliere : petitd\@igbmc.fr\n
 
-Script Version 2.00 - 18/10/2022.
+Script Version 2.20 - 26/09/2025.
 Changelog : 
-- recodage en incluant les nouveaux champs du formulaire 
-- reprise du code avec le module MsOffice Writer
+- Gestion des parapgraphes longs (>2000 caractères)
 
 Continuez en tapant 1 puis Valider, ou quittez en tapant une autre touche.\n";
 chomp (my $result = <STDIN>);
@@ -333,7 +332,7 @@ chirurgicales) ? Indiquer leur nombre et leur durée. </h3>",
 dans la limite des 2500 premiers caractères]</h2>");
 
 if ($line =~ /\w/ and $line !~ /</){
-$doc->write(decode_entities($line),"\n");
+$doc->write(decode_entities($line),"<br>");
 }
 
 foreach my $balise (keys %balises){
@@ -344,7 +343,13 @@ $line =~ s/>false</>NON</g;
 $line =~ s/<$balise>//;
 $line =~ s/<\/$balise>//;
 $line =~ s/   +/ /;
-$doc->write($balises{$balise},decode_entities($line));
+my $to_write = $balises{$balise} . decode_entities($line);
+# Split long writes to prevent truncation in Word processing
+while (length($to_write) > 2000) {
+    my $chunk = substr($to_write, 0, 2000, '');
+    $doc->write($chunk);
+}
+$doc->write($to_write) if $to_write;
 }
 else{
 if($line=~ "<\/$balise>"){

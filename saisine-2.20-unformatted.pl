@@ -9,7 +9,9 @@ ATTENTION, si un fichier du nom de la saisine (.doc) existe, il sera repris par 
 Aucune garantie n'est fournie sur l'exactitude de la retranscription par le script, si vous constatez un souci, merci de m'en faire part.\n-
 Benoit Petit-Demouliere : petitd\@igbmc.fr\n
 
-Script Version 1.02 - 07/03/2019.
+Script Version 2.20 - 26/09/2025.
+Changelog : 
+- Gestion des parapgraphes longs (>2000 caractères)
 
 Continuez en tapant 1 puis Valider, ou quittez en tapant une autre touche.\n";
 chomp (my $result = <STDIN>);
@@ -378,8 +380,21 @@ my $out = $_;
 
 my $rtf = RTF::Writer->new_to_file( $out );
 my @pars = split( /\n+/, $utf );
+# Split long paragraphs to prevent truncation in RTF rendering
+my @final_par;
+for my $par (@pars) {
+    if (length($par) > 2000) {
+        while (length($par) > 2000) {
+            my $chunk = substr($par, 0, 2000, '');
+            push @final_par, $chunk;
+        }
+        push @final_par, $par if $par;
+    } else {
+        push @final_par, $par;
+    }
+}
 $rtf->prolog( title => $out );
-for my $par ( @pars ) {
+for my $par ( @final_par ) {
     $rtf->paragraph( \$par );  # need to pass $par by reference
 }
 $rtf->close;
